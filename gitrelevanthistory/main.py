@@ -30,6 +30,7 @@ import shutil
 import subprocess
 import tempfile
 import typing
+import os
 
 from docopt import docopt
 
@@ -42,7 +43,7 @@ logger = logging.root
 def build_git_filter_path_spec(git_repo: pathlib.Path, filter: str, glob_filter_list: bool = False) -> typing.List[str]:
 
     init_files_list = []
-    if not pathlib.Path(filter).exists():
+    if not os.path.isfile(filter):
         logger.debug(f"Filter is not a file, assuming it is a subdirectory of {git_repo}")
 
         str_subdir = filter
